@@ -4,5 +4,9 @@
 	"routes": [{
 		"source": "^/euro.xsodata/.*$",
 		"destination": "fftinyjs_be"
+		
+	}, {
+         "source": ".*\\.xsjs",
+         "destination": "fftinyjs_be"
 	}]
 }
