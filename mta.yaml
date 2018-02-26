@@ -1,0 +1,42 @@
+ID: fftinyworld
+_schema-version: '2.0'
+version: 0.0.1
+
+modules:
+ - name: fftinydb
+   type: hdb
+   path: fftinydb
+   requires:
+    - name: hdi_fftinydb
+
+
+ - name: fftinyjs
+   type: nodejs
+   path: fftinyjs
+# ---- dependency on DB
+   requires:
+     - name: fftinydb
+     - name: hdi_fftinydb
+# ---- exposes SERVICE URL to consumers
+   provides:
+    - name: fftinyjs_api
+      properties:
+         url: ${default-url}
+         service_url: ${default-url}
+
+ - name: fftinyui
+   type: html5
+   path: fftinyui
+# -- requires fftinyjs service URL 
+   requires: 
+    - name: fftinyjs_api 
+      group: destinations 
+      properties: 
+        name: fftinyjs_be 
+        url: ~{service_url}   
+
+resources:
+ - name: hdi_fftinydb
+   properties:
+      hdi-container-name: ${service-name}
+   type: com.sap.xs.hdi-container

@@ -1,0 +1,13 @@
+namespace fftinyworld.fftinydb;
+
+context fftinyf {
+    entity world {
+        key continent : String(100);
+    };
+
+    /*@@layout{"layoutInfo":{"x":-663,"y":-86.5}}*/
+    entity country {
+        key name   : String(100);
+            partof : association[0..1] to world;
+    };
+};
