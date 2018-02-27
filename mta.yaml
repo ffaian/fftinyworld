@@ -17,6 +17,7 @@ modules:
    requires:
      - name: fftinydb
      - name: hdi_fftinydb
+     - name: fftiny_uaa
 # ---- exposes SERVICE URL to consumers
    provides:
     - name: fftinyjs_api
@@ -33,10 +34,16 @@ modules:
       group: destinations 
       properties: 
         name: fftinyjs_be 
-        url: ~{service_url}   
+        url: ~{service_url}
+        forwardAuthToken: true
+    - name: fftiny_uaa    
 
 resources:
  - name: hdi_fftinydb
    properties:
       hdi-container-name: ${service-name}
    type: com.sap.xs.hdi-container
+ - name: fftiny_uaa
+   type: com.sap.xs.uaa
+   parameters:
+      path: ./xs-security.json

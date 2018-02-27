@@ -1,12 +1,25 @@
 {
 	"welcomeFile": "index.html",
-	"authenticationMethod": "none",
-	"routes": [{
-		"source": "^/euro.xsodata/.*$",
-		"destination": "fftinyjs_be"
-		
-	}, {
-         "source": ".*\\.xsjs",
-         "destination": "fftinyjs_be"
-	}]
+	"authenticationMethod": "route",
+	"routes":
+		[
+			{
+				"source": "^/euro.xsodata/.*$",
+				"destination": "fftinyjs_be",
+				"authenticationType": "xsuaa",
+				"scope": "$XSAPPNAME.view"
+			},
+			
+			{
+				"source": ".*\\.xsjs",
+				"destination": "fftinyjs_be",
+				"scope": "$XSAPPNAME.create" 
+			},
+
+			{
+				"source": "^/(.*)$",
+				"localDir": "resources",
+				"scope": "$XSAPPNAME.view"
+			}
+		]
 }
